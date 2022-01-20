@@ -1,15 +1,15 @@
-import { useAuth0 } from "@auth0/auth0-react"
+import { useSession } from "next-auth/react"
 import { Button } from "@mui/material"
 
 function LogoutButton() {
-  const { isAuthenticated, logout } = useAuth0()
+  const { signOut, status } = useSession()
 
   return (
-    isAuthenticated && (
+    status === "authenticated" && (
       <Button
         variant="contained"
         onClick={() => {
-          logout({ returnTo: window.location.origin })
+          signOut({ callbackUrl: window.location.origin })
         }}
       >
         Log out

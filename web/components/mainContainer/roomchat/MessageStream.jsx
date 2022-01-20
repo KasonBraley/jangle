@@ -3,12 +3,12 @@ import { SocketContext } from "../../../context/socket"
 import { connect } from "react-redux"
 import axios from "axios"
 import { setRoomMessages } from "../../../store/rooms"
-import { useAuth0 } from "@auth0/auth0-react"
+import { useSession } from "next-auth/react"
 import { Typography } from "@mui/material"
 
 const MessageStream = ({ setRoomMessages, rooms, username }) => {
-  const { user } = useAuth0()
-  username = user.nickname
+  const { data: session } = useSession()
+  username = session.user.name
   const { socket, currentRoom } = useContext(SocketContext)
   let [messages, setMessages] = useState([])
 

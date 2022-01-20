@@ -1,4 +1,4 @@
-import { useAuth0 } from "@auth0/auth0-react"
+import { useSession } from "next-auth/react"
 import Nav from "./Nav"
 import ChatSidebar from "./Chat"
 import MatcherSidebar from "./Matcher/MatcherSidebar"
@@ -7,17 +7,17 @@ import { useRouter } from "next/router"
 
 const LeftSidebar = () => {
   const router = useRouter()
-  const { isAuthenticated } = useAuth0()
+  const { status } = useSession()
 
-  return isAuthenticated ? (
+  return status === "authenticated" ? (
     <div
       className="left-sidebar"
       id="resizable"
       elevation={10}
       data-testid="left-sidebar"
     >
-      {router.pathname === "/roomchat" ? <ChatSidebar /> : null}
-      {router.pathname === "/matcher" ? <MatcherSidebar /> : null}
+      {router.pathname === "/chat" ? <ChatSidebar /> : null}
+      {router.pathname === "/match" ? <MatcherSidebar /> : null}
 
       <div className="footer" data-testid="footer">
         <Nav />

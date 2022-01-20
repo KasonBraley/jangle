@@ -3,7 +3,7 @@ import { Box, Tooltip, Button, Avatar } from "@mui/material"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import axios from "axios"
 import swal from "sweetalert"
-import { useAuth0 } from "@auth0/auth0-react"
+import { useSession } from "next-auth/react"
 import { SocketContext } from "../../../context/socket"
 
 const UserButton = ({ username }) => {
@@ -22,12 +22,12 @@ const UserButton = ({ username }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const { user } = useAuth0()
+  const { data: session } = useSession()
   const { socket, setCurrentRoom } = useContext(SocketContext)
 
   const createDirectMessageRoom = async () => {
-    let roomname = `${user.nickname}-${username}`
-    let body = { roomname, users: [user.nickname, username] }
+    let roomname = `${session.user.name}-${username}`
+    let body = { roomname, users: [session.user.name, username] }
 
     try {
       await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body)
@@ -35,7 +35,7 @@ const UserButton = ({ username }) => {
       try {
         socket.emit("join", {
           room: roomname,
-          user: user.nickname,
+          user: session.user.nam,
         })
         setCurrentRoom(roomname)
       } catch (err) {
@@ -59,7 +59,7 @@ const UserButton = ({ username }) => {
   }
 
   const handleClick = async () => {
-    if (username === user.nickname) {
+    if (username === session.user.name) {
       swal({
         title: "Hold up...",
         text: "You are trying to send a Direct Message to yourself. Try someone else!",
@@ -95,7 +95,7 @@ const UserButton = ({ username }) => {
             >
               <Avatar
                 className="rightAvatar"
-                alt={user.nickname}
+                alt={session.user.name}
                 src={userProfile?.image?.url ? userProfile.image.url : null}
               />
               {username}

@@ -12,12 +12,12 @@ import {
 
 import { Logout } from "@mui/icons-material"
 import AccountCircleIcon from "@mui/icons-material/AccountCircle"
-import { useAuth0 } from "@auth0/auth0-react"
 import { useRouter } from "next/router"
+import { useSession } from "next-auth/react"
 
 function UserButton() {
   const router = useRouter()
-  const { logout, user } = useAuth0()
+  const { data: session, status, signout } = useSession()
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
   const handleClick = (event) => {
@@ -26,6 +26,11 @@ function UserButton() {
 
   const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  let user
+  if (status === "authenticated") {
+    user = session.user.name
   }
 
   return (
@@ -91,7 +96,7 @@ function UserButton() {
         <Divider />
         <MenuItem
           onClick={() => {
-            logout({ returnTo: window.location.origin })
+            signout()
           }}
         >
           <ListItemIcon>

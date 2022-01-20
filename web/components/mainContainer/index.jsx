@@ -7,9 +7,9 @@ const MainContainer = (props) => {
   let feature
   if (router.pathname === "/profile") {
     feature = ""
-  } else if (router.pathname === "/roomchat") {
+  } else if (router.pathname === "/chat") {
     feature = "Room Chat"
-  } else if (router.pathname === "/matcher") {
+  } else if (router.pathname === "/match") {
     feature = ""
   }
 
@@ -18,7 +18,7 @@ const MainContainer = (props) => {
       <div
         data-testid="main-container"
         className={
-          router.pathname !== "/matcher"
+          router.pathname !== "/match"
             ? "main-container"
             : "main-container-matcher"
         }

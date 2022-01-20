@@ -1,12 +1,14 @@
-import { useAuth0 } from "@auth0/auth0-react"
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/router"
 
 import Landing from "../components/mainContainer/Landing"
 
 function App() {
-  let { isAuthenticated } = useAuth0()
+  const router = useRouter()
+  const { data: session } = useSession()
 
   function RequireAuth({ children, redirectTo }) {
-    return isAuthenticated ? children : <Navigate to={redirectTo} />
+    return session ? children : router.push(redirectTo)
   }
 
   return (

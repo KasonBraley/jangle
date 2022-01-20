@@ -1,7 +1,7 @@
 import { useState, useContext } from "react"
-import { useAuth0 } from "@auth0/auth0-react"
 import axios from "axios"
 import swal from "sweetalert"
+import { useSession } from "next-auth/react"
 import {
   Paper,
   Chip,
@@ -30,8 +30,13 @@ const theme = createTheme({
 })
 
 export default function Matcher() {
-  const { user } = useAuth0()
+  const { data: session, status } = useSession()
   const { setCurrentRoom } = useContext(SocketContext)
+
+  let user
+  if (status === "authenticated") {
+    user = session.user.name
+  }
 
   const [selected, setSelected] = useState([])
   const [bio, setBio] = useState("")

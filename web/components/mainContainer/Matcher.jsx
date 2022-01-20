@@ -1,5 +1,5 @@
 import { useState, useContext } from "react"
-import { useAuth0 } from "@auth0/auth0-react"
+import { useSession } from "next-auth/react"
 import axios from "axios"
 import swal from "sweetalert"
 import {
@@ -30,7 +30,7 @@ const theme = createTheme({
 })
 
 const Matcher = () => {
-  const { user } = useAuth0()
+  const { data: session } = useSession()
   const { setCurrentRoom } = useContext(SocketContext)
 
   const [selected, setSelected] = useState([])
@@ -44,10 +44,11 @@ const Matcher = () => {
     }
     await getRandomUser()
   }
+  let user = session.user
 
   const createDirectMessageRoom = async () => {
-    let roomname = `${user.nickname}-${username}`
-    let body = { roomname, users: [user.nickname, username] }
+    let roomname = `${user.name}-${username}`
+    let body = { roomname, users: [user.name, username] }
 
     try {
       await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body)
@@ -76,7 +77,7 @@ const Matcher = () => {
   const getRandomUser = async () => {
     try {
       let res = await axios.get(
-        `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}/random`
+        `${process.env.REACT_APP_API_SERVER}/profiles/${user.name}/random`
       )
       if (res.data) {
         setSelected(res.data.interests)

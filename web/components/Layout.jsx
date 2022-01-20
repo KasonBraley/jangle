@@ -11,7 +11,7 @@ function Layout({ children }) {
         <LeftSidebar />
         <MainContainer>{children}</MainContainer>
         {/* @@@ use next's path detection instead */}
-        {/* {location.pathname === '/roomchat' && <RightSidebar />} */}
+        {/* {location.pathname === '/chat' && <RightSidebar />} */}
       </div>
     </>
   )

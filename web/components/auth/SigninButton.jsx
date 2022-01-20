@@ -1,15 +1,13 @@
 import { Button } from "@mui/material"
-import { useAuth0 } from "@auth0/auth0-react"
+import { signIn } from "next-auth/react"
 
 function SigninButton() {
-  const { loginWithRedirect } = useAuth0()
-
   return (
     <Button
       id="profileBtn"
       variant="contained"
       color="primary"
-      onClick={loginWithRedirect}
+      onClick={() => signIn()}
     >
       Sign In
     </Button>

@@ -3,7 +3,7 @@ import { MenuItem, InputBase, Button, Typography, Divider } from "@mui/material"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import CheckIcon from "@mui/icons-material/Check"
 import axios from "axios"
-import { useAuth0 } from "@auth0/auth0-react"
+import { useSession } from "next-auth/react"
 import swal from "sweetalert"
 import { SocketContext } from "../../../../context/socket"
 
@@ -16,7 +16,7 @@ const theme = createTheme({
 })
 
 const PrivateRoomForm = ({ handleClose, roomname }) => {
-  const { user } = useAuth0()
+  const { data: session } = useSession()
   const { socket, setCurrentRoom } = useContext(SocketContext)
 
   const handleSubmit = async (e) => {
@@ -42,7 +42,7 @@ const PrivateRoomForm = ({ handleClose, roomname }) => {
       try {
         socket.emit("join", {
           room: res.data.roomname,
-          user: user.nickname,
+          user: session.user.name,
         })
         setCurrentRoom(roomname)
       } catch (err) {

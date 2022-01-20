@@ -1,11 +1,11 @@
 import { useContext } from "react"
 import { Paper, InputBase } from "@mui/material"
 import { SocketContext } from "../../../context/socket"
-import { useAuth0 } from "@auth0/auth0-react"
+import { useSession } from "next-auth/react"
 
 const MessageBar = () => {
   const { socket, currentRoom } = useContext(SocketContext)
-  const { user } = useAuth0()
+  const { data: session } = useSession()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -16,7 +16,7 @@ const MessageBar = () => {
       socket.emit("message", {
         content,
         roomname: currentRoom,
-        username: user.nickname,
+        username: session.user.name,
         timestamp: date,
       })
     } catch (err) {

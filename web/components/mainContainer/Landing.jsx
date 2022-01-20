@@ -1,9 +1,9 @@
-import { Button, Typography, CardMedia } from "@mui/material"
+import { Button, Typography } from "@mui/material"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import AccountCircleIcon from "@mui/icons-material/AccountCircle"
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined"
 import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied"
-import { useAuth0 } from "@auth0/auth0-react"
+import { signIn, useSession } from "next-auth/react"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -19,13 +19,13 @@ const theme = createTheme({
 })
 
 const Landing = () => {
-  const { isAuthenticated, loginWithRedirect } = useAuth0()
+  const { status } = useSession()
 
   return (
     <div id="landing">
       <ThemeProvider theme={theme}>
         <h1>Welcome to Jangle.</h1>
-        {isAuthenticated ? (
+        {status === "authenticated" ? (
           <>
             <Typography className="letterSpacing" variant="h6">
               Let&apos;s get started! What would you like to do?
@@ -42,7 +42,7 @@ const Landing = () => {
                 Update Profile
               </Button>
             </Link>
-            <Link href="/roomchat">
+            <Link href="/chat">
               <Button
                 data-testid="roomchat-btn"
                 className="landBtn"
@@ -54,7 +54,7 @@ const Landing = () => {
                 Start Chatting
               </Button>
             </Link>
-            <Link href="/matcher">
+            <Link href="/match">
               <Button
                 data-testid="matcher-btn"
                 className="landBtn"
@@ -88,8 +88,8 @@ const Landing = () => {
             />
 
             <Typography className="letterSpacing">
-              Please <a onClick={loginWithRedirect}>sign in</a> or{" "}
-              <a onClick={loginWithRedirect}>register</a> to continue.
+              Please <a onClick={() => signIn()}>sign in</a> or{" "}
+              <a onClick={() => signIn()}>register</a> to continue.
             </Typography>
           </>
         )}

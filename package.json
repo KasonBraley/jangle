@@ -1,6 +1,9 @@
 {
   "name": "jangle",
   "packageManager": "yarn@3.1.1",
+  "workspaces": [
+    "web"
+  ],
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",

@@ -3,7 +3,7 @@ import axios from "axios"
 import { connect } from "react-redux"
 import { setRooms } from "../../../../store/rooms"
 import { SocketContext } from "../../../../context/socket"
-import { useAuth0 } from "@auth0/auth0-react"
+import { useSession } from "next-auth/react"
 import DirectMessage from "../Chat/DirectMessage"
 import { TreeView } from "@mui/lab"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
@@ -12,13 +12,14 @@ import { useRouter } from "next/router"
 
 const MatcherSidebar = (props) => {
   const router = useRouter()
-  const { user, isAuthenticated } = useAuth0()
+  const { data: session, status } = useSession()
   const { socket, setCurrentRoom, currentRoom } = useContext(SocketContext)
   const [directMsgRooms, setDirectMsgRooms] = useState([])
 
-  let username = isAuthenticated
-    ? user.nickname
-    : `Test-User#${Math.round(Math.random() * 1000)}`
+  let username =
+    status === "authenticated"
+      ? session.user.name
+      : `Test-User#${Math.round(Math.random() * 1000)}`
 
   useEffect(() => {
     ;(async () => {
@@ -53,7 +54,7 @@ const MatcherSidebar = (props) => {
       console.log(err)
     }
 
-    if (router.pathname !== "/roomchat") router.push("/roomchat")
+    if (router.pathname !== "/chat") router.push("/chat")
   }
 
   return (

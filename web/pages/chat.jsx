@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 import MessageStream from "../components/mainContainer/roomchat/MessageStream"
-import MessageBar from "./components/mainContainer/roomchat./MessageBar"
-import CurrentRoom from "./components/mainContainer/roomchat./CurrentRoom"
+import MessageBar from "../components/mainContainer/roomchat/MessageBar"
+import CurrentRoom from "../components/mainContainer/roomchat/CurrentRoom"
 
 export default function Roomchat() {
   const messageEl = useRef(null)

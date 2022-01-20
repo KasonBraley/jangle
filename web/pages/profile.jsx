@@ -7,7 +7,7 @@ import {
   TextField,
   Button,
 } from "@mui/material"
-import { useAuth0 } from "@auth0/auth0-react"
+import { useSession } from "next-auth/react"
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles"
 import CheckIcon from "@mui/icons-material/Check"
 import axios from "axios"
@@ -41,11 +41,16 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
 }))
 
 export default function Profile() {
-  const { user } = useAuth0()
+  const { data: session, status } = useSession()
   const [selected, setSelected] = useState()
   const [bio, setBio] = useState("")
   const [currentFile, setCurrentFile] = useState(null)
   const [previewImage, setPreviewImage] = useState(null)
+
+  let user
+  if (status === "authenticated") {
+    user = session.user.name
+  }
 
   const interests = [
     { label: "Music", value: "music" },

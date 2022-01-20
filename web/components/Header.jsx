@@ -1,8 +1,9 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Button, Tooltip } from "@mui/material"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined"
-import { useAuth0 } from "@auth0/auth0-react"
+import { useSession } from "next-auth/react"
 
 import github from "../img/github.png"
 import UserButton from "./auth/UserButton"
@@ -17,29 +18,37 @@ const theme = createTheme({
 })
 
 const Header = () => {
-  const { isAuthenticated } = useAuth0()
+  const { status } = useSession()
 
   return (
     <div className="header" data-testid="header">
       <ThemeProvider theme={theme}>
-        {isAuthenticated ? <UserButton /> : <SigninButton />}
+        {status === "authenticated" ? <UserButton /> : <SigninButton />}
 
         <h1>
           <Link href="/">
-            <div>
+            <a>
               <ForumOutlinedIcon id="titleBubble" />
-              <a>Jangle</a>
-            </div>
+              <span>Jangle</span>
+            </a>
           </Link>
         </h1>
 
-        <Link href="https://github.com/jangle401/jangle-front">
-          <Tooltip title="GitHub">
-            <Button id="githubBtn" variant="contained" color="primary">
-              <img className="btnImg" src={github} />
-            </Button>
-          </Tooltip>
-        </Link>
+        <Tooltip title="GitHub">
+          <Button id="githubBtn" variant="contained" color="primary">
+            <Link href="https://github.com/KasonBraley/jangle">
+              <a>
+                <Image
+                  className="btnImg"
+                  src={github}
+                  alt="github"
+                  width={30}
+                  height={30}
+                />
+              </a>
+            </Link>
+          </Button>
+        </Tooltip>
       </ThemeProvider>
     </div>
   )

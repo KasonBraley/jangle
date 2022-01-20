@@ -1,12 +1,12 @@
-import { useAuth0 } from "@auth0/auth0-react"
+import { signIn, useSession } from "next-auth/react"
 import { Button } from "@mui/material"
 
 function LoginButton() {
-  const { isAuthenticated, loginWithRedirect } = useAuth0()
+  const { status } = useSession()
 
   return (
-    !isAuthenticated && (
-      <Button variant="contained" onClick={loginWithRedirect}>
+    !status === "authenticated" && (
+      <Button variant="contained" onClick={() => signIn()}>
         Log in
       </Button>
     )

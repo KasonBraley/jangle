@@ -1,9 +1,20 @@
-import { useAuth0 } from "@auth0/auth0-react"
+import { useSession } from "next-auth/react"
+
+export default function Component() {
+  const { data: session, status } = useSession()
+
+  if (status === "authenticated") {
+    return <p>Signed in as {session.user.email}</p>
+  }
+
+  return <a href="/api/auth/signin">Sign in</a>
+}
 import LoadingButton from "@mui/lab/LoadingButton"
 
-function LoadingWrapper({ children }) {
-  const { isLoading, error } = useAuth0()
-  if (isLoading) {
+export function LoadingWrapper({ children }) {
+  const { status } = useSession()
+
+  if (status === "loading") {
     return (
       <div>
         <LoadingButton loading variant="contained" color="error" />
@@ -15,5 +26,3 @@ function LoadingWrapper({ children }) {
   }
   return <>{children}</>
 }
-
-export default LoadingWrapper

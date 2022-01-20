@@ -7,7 +7,7 @@ import {
   TextField,
   Button,
 } from "@mui/material"
-import { useAuth0 } from "@auth0/auth0-react"
+import { useSession } from "next-auth/react"
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles"
 import CheckIcon from "@mui/icons-material/Check"
 import axios from "axios"
@@ -41,11 +41,13 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
 }))
 
 const Profile = () => {
-  const { user } = useAuth0()
+  const { data: session } = useSession()
   const [selected, setSelected] = useState()
   const [bio, setBio] = useState("")
   const [currentFile, setCurrentFile] = useState(null)
   const [previewImage, setPreviewImage] = useState(null)
+
+  let user = session.user
 
   const interests = [
     { label: "Music", value: "music" },
@@ -70,7 +72,7 @@ const Profile = () => {
       try {
         //auto-populates form fields with existing profile data, if they have a profile
         let res = await axios.get(
-          `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`
+          `${process.env.REACT_APP_API_SERVER}/profiles/${user.name}`
         )
         if (res.data[0]) {
           setSelected(res.data[0].interests)
@@ -81,7 +83,7 @@ const Profile = () => {
         console.log(err)
       }
     })()
-  }, [user.nickname])
+  }, [user.name])
 
   const handleSelected = (event, newSelection) => {
     setSelected(newSelection)

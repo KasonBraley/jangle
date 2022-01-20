@@ -5,7 +5,7 @@ import { TreeView } from "@mui/lab"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
-import { useAuth0 } from "@auth0/auth0-react"
+import { useSession } from "next-auth/react"
 
 import { setRooms } from "../../../../store/rooms"
 import { SocketContext } from "../../../../context/socket"
@@ -23,11 +23,12 @@ const theme = createTheme({
 
 const Rooms = (props) => {
   const { socket, setCurrentRoom, currentRoom } = useContext(SocketContext)
-  const { isAuthenticated, user } = useAuth0()
+  const { data: session, status } = useSession()
 
-  let username = isAuthenticated
-    ? user.nickname
-    : `Test-User#${Math.round(Math.random() * 1000)}`
+  let username =
+    status === "authenticated"
+      ? session.user.name
+      : `Test-User#${Math.round(Math.random() * 1000)}`
 
   const [publicRooms, setPublicRooms] = useState([])
   const [directMsgRooms, setDirectMsgRooms] = useState([])
