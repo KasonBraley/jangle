@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
@@ -13,52 +13,51 @@ const theme = createTheme({
   },
 });
 
-const Nav = () => {
+export default function Nav() {
   return (
     <div id="leftSidebar">
       <ThemeProvider theme={theme}>
         <div className="navRow">
-          <Button
-            data-testid="roomchat-left-btn"
-            size="small"
-            component={Link}
-            to={`/roomchat`}
-            variant="outlined"
-            color="primary"
-            className="navBtn"
-          >
-            Chat <ChatOutlinedIcon className="navIcon" />
-          </Button>
+          <Link href="/chat">
+            <Button
+              data-testid="roomchat-left-btn"
+              size="small"
+              variant="outlined"
+              color="primary"
+              className="navBtn"
+            >
+              Chat <ChatOutlinedIcon className="navIcon" />
+            </Button>
+          </Link>
         </div>
         <div className="navRow">
-          <Button
-            data-testid="matcher-left-btn"
-            size="small"
-            component={Link}
-            to={`/matcher`}
-            variant="outlined"
-            color="primary"
-            className="navBtn"
-          >
-            Match <SentimentVerySatisfiedIcon className="navIcon" />
-          </Button>
+          <Link href="/match">
+            <Button
+              data-testid="matcher-left-btn"
+              size="small"
+              variant="outlined"
+              color="primary"
+              className="navBtn"
+            >
+              Match <SentimentVerySatisfiedIcon className="navIcon" />
+            </Button>
+          </Link>
         </div>
         <div className="navRow">
-          <Button
-            data-testid="profile-left-btn"
-            size="small"
-            component={Link}
-            to={`/profile`}
-            variant="outlined"
-            color="primary"
-            className="navBtn"
-          >
-            Profile <AccountCircleIcon className="navIcon" />
-          </Button>
+          <Link href="/profile">
+            <Button
+              data-testid="profile-left-btn"
+              size="small"
+              variant="outlined"
+              color="primary"
+              className="navBtn"
+            >
+              Profile <AccountCircleIcon className="navIcon" />
+            </Button>
+          </Link>
         </div>
       </ThemeProvider>
     </div>
   );
-};
+}
 
-export default Nav;

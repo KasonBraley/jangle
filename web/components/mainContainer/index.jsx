@@ -1,15 +1,15 @@
 import { Typography } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { useRouter } from 'next/router'
 
 const MainContainer = (props) => {
-  const location = useLocation();
+  const router = useRouter()
 
   let feature;
-  if (location.pathname === '/profile') {
+  if (router.pathname === '/profile') {
     feature = '';
-  } else if (location.pathname === '/roomchat') {
+  } else if (router.pathname === '/roomchat') {
     feature = 'Room Chat';
-  } else if (location.pathname === '/matcher') {
+  } else if (router.pathname === '/matcher') {
     feature = '';
   }
 
@@ -18,7 +18,7 @@ const MainContainer = (props) => {
       <div
         data-testid="main-container"
         className={
-          location.pathname !== '/matcher'
+          router.pathname !== '/matcher'
             ? 'main-container'
             : 'main-container-matcher'
         }

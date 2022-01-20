@@ -3,10 +3,10 @@ import Nav from './Nav';
 import ChatSidebar from './Chat';
 import MatcherSidebar from './Matcher/MatcherSidebar';
 import { Typography } from '@mui/material';
-
-import { Route, Routes } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
 const LeftSidebar = () => {
+  const router = useRouter();
   const { isAuthenticated } = useAuth0();
 
   return isAuthenticated ? (
@@ -16,10 +16,9 @@ const LeftSidebar = () => {
       elevation={10}
       data-testid="left-sidebar"
     >
-      <Routes>
-        <Route path="/roomchat" element={<ChatSidebar />} />
-        <Route path="/matcher" element={<MatcherSidebar />} />
-      </Routes>
+      {router.pathname === '/roomchat' ? <ChatSidebar /> : null}
+      {router.pathname === '/matcher' ? <MatcherSidebar /> : null}
+
       <div className="footer" data-testid="footer">
         <Nav />
         <Typography

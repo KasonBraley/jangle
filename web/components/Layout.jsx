@@ -1,21 +1,17 @@
 import MainContainer from './mainContainer';
 import Header from './Header';
 import LeftSidebar from './Sidebars/LeftSidebar';
-import RightSidebar from './Sidebars/RightSidebar';
-import { Outlet, useLocation } from 'react-router-dom';
+// import RightSidebar from './Sidebars/RightSidebar';
 
-function Layout() {
-  const location = useLocation();
-
+function Layout({ children }) {
   return (
     <>
       <Header />
       <div className="container">
         <LeftSidebar />
-        <MainContainer>
-          <Outlet />
-        </MainContainer>
-        {location.pathname === '/roomchat' && <RightSidebar />}
+        <MainContainer>{children}</MainContainer>
+        {/* @@@ use next's path detection instead */}
+        {/* {location.pathname === '/roomchat' && <RightSidebar />} */}
       </div>
     </>
   );

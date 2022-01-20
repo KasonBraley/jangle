@@ -8,12 +8,10 @@ import DirectMessage from '../Chat/DirectMessage';
 import { TreeView } from '@mui/lab';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
 const MatcherSidebar = (props) => {
-  const location = useLocation();
-  let navigate = useNavigate();
+  const router = useRouter();
   const { user, isAuthenticated } = useAuth0();
   const { socket, setCurrentRoom, currentRoom } = useContext(SocketContext);
   const [directMsgRooms, setDirectMsgRooms] = useState([]);
@@ -55,7 +53,7 @@ const MatcherSidebar = (props) => {
       console.log(err);
     }
 
-    if (location.pathname !== '/roomchat') navigate('/roomchat');
+    if (router.pathname !== '/roomchat') router.push('/roomchat');
   };
 
   return (
