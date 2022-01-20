@@ -1,15 +1,15 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose")
 
-const options = { toJSON: { virtuals: true } };
+const options = { toJSON: { virtuals: true } }
 
 const ImageSchema = new mongoose.Schema({
   url: String,
   filename: String,
-});
+})
 
-ImageSchema.virtual('thumbnail').get(function () {
-  return this.url.replace('/upload', '/upload/w_200');
-});
+ImageSchema.virtual("thumbnail").get(function () {
+  return this.url.replace("/upload", "/upload/w_200")
+})
 
 const profileSchema = new mongoose.Schema(
   {
@@ -31,8 +31,8 @@ const profileSchema = new mongoose.Schema(
     },
   },
   options
-);
+)
 
-const Profile = mongoose.model('Profile', profileSchema);
+const Profile = mongoose.model("Profile", profileSchema)
 
-module.exports = Profile;
+module.exports = Profile

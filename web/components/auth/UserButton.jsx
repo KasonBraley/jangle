@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react"
 import {
   Box,
   Tooltip,
@@ -8,29 +8,29 @@ import {
   MenuItem,
   Divider,
   ListItemIcon,
-} from '@mui/material';
+} from "@mui/material"
 
-import { Logout } from '@mui/icons-material';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useRouter } from 'next/router'
+import { Logout } from "@mui/icons-material"
+import AccountCircleIcon from "@mui/icons-material/AccountCircle"
+import { useAuth0 } from "@auth0/auth0-react"
+import { useRouter } from "next/router"
 
 function UserButton() {
   const router = useRouter()
-  const { logout, user } = useAuth0();
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const { logout, user } = useAuth0()
+  const [anchorEl, setAnchorEl] = useState(null)
+  const open = Boolean(anchorEl)
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
           <Button
             data-testid="profile-btn"
@@ -53,37 +53,37 @@ function UserButton() {
         PaperProps={{
           elevation: 0,
           sx: {
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            overflow: "visible",
+            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 1.5,
-            '& .MuiAvatar-root': {
+            "& .MuiAvatar-root": {
               width: 32,
               height: 32,
               ml: -0.5,
               mr: 1,
             },
-            '&:before': {
+            "&:before": {
               content: '""',
-              display: 'block',
-              position: 'absolute',
+              display: "block",
+              position: "absolute",
               top: 0,
               left: 10,
               width: 10,
               height: 10,
-              bgcolor: 'background.paper',
-              transform: 'translateY(-50%) rotate(45deg)',
+              bgcolor: "background.paper",
+              transform: "translateY(-50%) rotate(45deg)",
               zIndex: 0,
             },
           },
         }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>Signed in as {user.nickname}</MenuItem>
         <Divider />
         <MenuItem
           onClick={() => {
-            router.push('/profile');
+            router.push("/profile")
           }}
         >
           <Avatar alt={user.nickname} src={user.picture} /> Profile
@@ -91,7 +91,7 @@ function UserButton() {
         <Divider />
         <MenuItem
           onClick={() => {
-            logout({ returnTo: window.location.origin });
+            logout({ returnTo: window.location.origin })
           }}
         >
           <ListItemIcon>
@@ -101,6 +101,6 @@ function UserButton() {
         </MenuItem>
       </Menu>
     </>
-  );
+  )
 }
-export default UserButton;
+export default UserButton

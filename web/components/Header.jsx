@@ -33,13 +33,13 @@ const Header = () => {
           </Link>
         </h1>
 
-        <Tooltip title="GitHub">
-          <Link href="https://github.com/jangle401/jangle-front">
+        <Link href="https://github.com/jangle401/jangle-front">
+          <Tooltip title="GitHub">
             <Button id="githubBtn" variant="contained" color="primary">
               <img className="btnImg" src={github} />
             </Button>
-          </Link>
-        </Tooltip>
+          </Tooltip>
+        </Link>
       </ThemeProvider>
     </div>
   )

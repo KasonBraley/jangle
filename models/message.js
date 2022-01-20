@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose")
 
 const messageSchema = new mongoose.Schema({
   roomname: {
@@ -18,8 +18,8 @@ const messageSchema = new mongoose.Schema({
     required: true,
   },
   preferredName: String,
-});
+})
 
-const Message = mongoose.model('Message', messageSchema);
+const Message = mongoose.model("Message", messageSchema)
 
-module.exports = Message;
+module.exports = Message

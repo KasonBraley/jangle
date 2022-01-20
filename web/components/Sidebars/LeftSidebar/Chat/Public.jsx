@@ -1,4 +1,4 @@
-import { TreeItem } from '@mui/lab';
+import { TreeItem } from "@mui/lab"
 
 function Public({ publicRooms, joinRoom }) {
   return (
@@ -12,9 +12,9 @@ function Public({ publicRooms, joinRoom }) {
             label={room?.roomname}
             onClick={joinRoom}
           />
-        );
+        )
       })}
     </TreeItem>
-  );
+  )
 }
-export default Public;
+export default Public

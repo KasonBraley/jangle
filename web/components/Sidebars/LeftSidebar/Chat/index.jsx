@@ -1,11 +1,11 @@
-import Rooms from './Rooms';
+import Rooms from "./Rooms"
 
 const ChatSidebar = () => {
   return (
     <>
       <Rooms />
     </>
-  );
-};
+  )
+}
 
-export default ChatSidebar;
+export default ChatSidebar

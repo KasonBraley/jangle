@@ -1,13 +1,13 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers } from "redux"
 
-import roomsReducer from './rooms';
+import roomsReducer from "./rooms"
 
 let reducers = combineReducers({
   rooms: roomsReducer,
-});
+})
 
 const store = () => {
-  return createStore(reducers);
-};
+  return createStore(reducers)
+}
 
-export default store;
+export default store

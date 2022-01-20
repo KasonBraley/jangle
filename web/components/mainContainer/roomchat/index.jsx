@@ -1,19 +1,19 @@
-import { useEffect, useRef } from 'react';
-import MessageStream from './MessageStream';
-import MessageBar from './MessageBar';
-import CurrentRoom from './CurrentRoom';
+import { useEffect, useRef } from "react"
+import MessageStream from "./MessageStream"
+import MessageBar from "./MessageBar"
+import CurrentRoom from "./CurrentRoom"
 
 const Roomchat = () => {
-  const messageEl = useRef(null);
+  const messageEl = useRef(null)
 
   useEffect(() => {
     if (messageEl) {
-      messageEl.current.addEventListener('DOMNodeInserted', (event) => {
-        const { currentTarget: target } = event;
-        target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
-      });
+      messageEl.current.addEventListener("DOMNodeInserted", (event) => {
+        const { currentTarget: target } = event
+        target.scroll({ top: target.scrollHeight, behavior: "smooth" })
+      })
     }
-  }, []);
+  }, [])
 
   return (
     <>
@@ -27,7 +27,7 @@ const Roomchat = () => {
       </div>
       <MessageBar />
     </>
-  );
-};
+  )
+}
 
-export default Roomchat;
+export default Roomchat

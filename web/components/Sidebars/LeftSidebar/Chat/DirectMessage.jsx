@@ -1,4 +1,4 @@
-import { TreeItem } from '@mui/lab';
+import { TreeItem } from "@mui/lab"
 
 function DirectMessage({ startNodeId, directMsgRooms, joinRoom }) {
   return (
@@ -11,10 +11,10 @@ function DirectMessage({ startNodeId, directMsgRooms, joinRoom }) {
             label={room?.roomname}
             onClick={joinRoom}
           />
-        );
+        )
       })}
     </TreeItem>
-  );
+  )
 }
 
-export default DirectMessage;
+export default DirectMessage

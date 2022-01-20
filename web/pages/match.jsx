@@ -1,7 +1,7 @@
-import { useState, useContext } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-import axios from 'axios';
-import swal from 'sweetalert';
+import { useState, useContext } from "react"
+import { useAuth0 } from "@auth0/auth0-react"
+import axios from "axios"
+import swal from "sweetalert"
 import {
   Paper,
   Chip,
@@ -11,83 +11,83 @@ import {
   IconButton,
   Typography,
   Button,
-} from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import ThumbUpAltRoundedIcon from '@mui/icons-material/ThumbUpAltRounded';
-import ThumbDownAltRoundedIcon from '@mui/icons-material/ThumbDownAltRounded';
-import { SocketContext } from '../context/socket';
-import friends6 from '../img/friends6.jpeg';
+} from "@mui/material"
+import { createTheme, ThemeProvider } from "@mui/material/styles"
+import ThumbUpAltRoundedIcon from "@mui/icons-material/ThumbUpAltRounded"
+import ThumbDownAltRoundedIcon from "@mui/icons-material/ThumbDownAltRounded"
+import { SocketContext } from "../context/socket"
+import friends6 from "../img/friends6.jpeg"
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#7db1b1',
+      main: "#7db1b1",
     },
     secondary: {
-      main: '#EE8585',
+      main: "#EE8585",
     },
   },
-});
+})
 
 export default function Matcher() {
-  const { user } = useAuth0();
-  const { setCurrentRoom } = useContext(SocketContext);
+  const { user } = useAuth0()
+  const { setCurrentRoom } = useContext(SocketContext)
 
-  const [selected, setSelected] = useState([]);
-  const [bio, setBio] = useState('');
-  const [username, setUsername] = useState('');
-  const [image, setImage] = useState(null);
+  const [selected, setSelected] = useState([])
+  const [bio, setBio] = useState("")
+  const [username, setUsername] = useState("")
+  const [image, setImage] = useState(null)
 
   const handleUserChoice = async (userWasLiked) => {
     if (userWasLiked) {
-      await createDirectMessageRoom();
+      await createDirectMessageRoom()
     }
-    await getRandomUser();
-  };
+    await getRandomUser()
+  }
 
   const createDirectMessageRoom = async () => {
-    let roomname = `${user.nickname}-${username}`;
-    let body = { roomname, users: [user.nickname, username] };
+    let roomname = `${user.nickname}-${username}`
+    let body = { roomname, users: [user.nickname, username] }
 
     try {
-      await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body);
+      await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body)
       swal({
-        title: 'User Liked!',
+        title: "User Liked!",
         text: `This user has been added to your Direct Messages.`,
-      });
-      setCurrentRoom(body.roomname);
+      })
+      setCurrentRoom(body.roomname)
     } catch (err) {
       if (err.response.status === 409) {
         swal({
-          title: 'Hold up...',
+          title: "Hold up...",
           text: err.response.data.err,
           dangerMode: true,
-        });
+        })
       } else {
         swal({
           title: "That didn't work out.",
           text: `The request failed to be completed`,
           dangerMode: true,
-        });
+        })
       }
     }
-  };
+  }
 
   const getRandomUser = async () => {
     try {
       let res = await axios.get(
         `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}/random`
-      );
+      )
       if (res.data) {
-        setSelected(res.data.interests);
-        setBio(res.data.bio);
-        setUsername(res.data.username);
-        res.data.image?.url ? setImage(res.data.image.url) : setImage(null);
+        setSelected(res.data.interests)
+        setBio(res.data.bio)
+        setUsername(res.data.username)
+        res.data.image?.url ? setImage(res.data.image.url) : setImage(null)
       }
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   return (
     <div id="matcher">
@@ -95,8 +95,8 @@ export default function Matcher() {
         id="matcherPaper"
         elevation={0}
         sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
+          display: "flex",
+          flexWrap: "wrap",
         }}
       >
         <ThemeProvider theme={theme}>
@@ -124,10 +124,10 @@ export default function Matcher() {
                   >
                     {username}
                   </Typography>
-                  <Typography variant="h6" style={{ textAlign: 'left' }}>
+                  <Typography variant="h6" style={{ textAlign: "left" }}>
                     Interests:
                   </Typography>
-                  <div style={{ textAlign: 'left', marginBottom: '1rem' }}>
+                  <div style={{ textAlign: "left", marginBottom: "1rem" }}>
                     {selected.map((interest) => {
                       return (
                         <Chip
@@ -138,14 +138,14 @@ export default function Matcher() {
                           color="default"
                           key={interest}
                         />
-                      );
+                      )
                     })}
                   </div>
-                  <Typography variant="h6" style={{ textAlign: 'left' }}>
+                  <Typography variant="h6" style={{ textAlign: "left" }}>
                     Bio:
                   </Typography>
                   <Typography
-                    style={{ textAlign: 'left' }}
+                    style={{ textAlign: "left" }}
                     data-testid="matcher-bio"
                   >
                     {bio}
@@ -154,10 +154,10 @@ export default function Matcher() {
               </Card>
               <div
                 style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  flexWrap: 'nowrap',
-                  justifyContent: 'center',
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "nowrap",
+                  justifyContent: "center",
                 }}
               >
                 <IconButton
@@ -202,5 +202,5 @@ export default function Matcher() {
         </ThemeProvider>
       </Paper>
     </div>
-  );
+  )
 }

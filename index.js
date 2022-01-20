@@ -1,3 +1,3 @@
-const { start } = require('./server.js');
+const { start } = require("./server.js")
 
-start(process.env.PORT || 5000);
+start(process.env.PORT || 5000)

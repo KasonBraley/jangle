@@ -1,6 +1,6 @@
-import MainContainer from './mainContainer';
-import Header from './Header';
-import LeftSidebar from './Sidebars/LeftSidebar';
+import MainContainer from "./mainContainer"
+import Header from "./Header"
+import LeftSidebar from "./Sidebars/LeftSidebar"
 // import RightSidebar from './Sidebars/RightSidebar';
 
 function Layout({ children }) {
@@ -14,7 +14,7 @@ function Layout({ children }) {
         {/* {location.pathname === '/roomchat' && <RightSidebar />} */}
       </div>
     </>
-  );
+  )
 }
 
-export default Layout;
+export default Layout

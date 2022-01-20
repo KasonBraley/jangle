@@ -1,16 +1,16 @@
-import { Typography } from '@mui/material';
-import { useRouter } from 'next/router'
+import { Typography } from "@mui/material"
+import { useRouter } from "next/router"
 
 const MainContainer = (props) => {
   const router = useRouter()
 
-  let feature;
-  if (router.pathname === '/profile') {
-    feature = '';
-  } else if (router.pathname === '/roomchat') {
-    feature = 'Room Chat';
-  } else if (router.pathname === '/matcher') {
-    feature = '';
+  let feature
+  if (router.pathname === "/profile") {
+    feature = ""
+  } else if (router.pathname === "/roomchat") {
+    feature = "Room Chat"
+  } else if (router.pathname === "/matcher") {
+    feature = ""
   }
 
   return (
@@ -18,9 +18,9 @@ const MainContainer = (props) => {
       <div
         data-testid="main-container"
         className={
-          router.pathname !== '/matcher'
-            ? 'main-container'
-            : 'main-container-matcher'
+          router.pathname !== "/matcher"
+            ? "main-container"
+            : "main-container-matcher"
         }
       >
         <Typography
@@ -34,7 +34,7 @@ const MainContainer = (props) => {
         {props.children}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default MainContainer;
+export default MainContainer

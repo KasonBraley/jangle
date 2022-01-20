@@ -1,17 +1,17 @@
-import { Button } from '@mui/material';
-import Link from 'next/link';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
-import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Button } from "@mui/material"
+import Link from "next/link"
+import { createTheme, ThemeProvider } from "@mui/material/styles"
+import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined"
+import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied"
+import AccountCircleIcon from "@mui/icons-material/AccountCircle"
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#7db1b1',
+      main: "#7db1b1",
     },
   },
-});
+})
 
 export default function Nav() {
   return (
@@ -58,6 +58,5 @@ export default function Nav() {
         </div>
       </ThemeProvider>
     </div>
-  );
+  )
 }
-

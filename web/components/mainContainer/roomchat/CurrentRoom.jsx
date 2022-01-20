@@ -1,19 +1,19 @@
-import { useContext } from 'react';
-import { Typography } from '@mui/material';
-import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
-import { SocketContext } from '../../../context/socket';
+import { useContext } from "react"
+import { Typography } from "@mui/material"
+import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded"
+import { SocketContext } from "../../../context/socket"
 
 const CurrentRoom = () => {
-  const { currentRoom } = useContext(SocketContext);
+  const { currentRoom } = useContext(SocketContext)
 
   if (currentRoom) {
     return (
       <div>
-        <Typography variant="caption" sx={{ fontStyle: 'italic' }}>
+        <Typography variant="caption" sx={{ fontStyle: "italic" }}>
           Now talking in: {currentRoom}
         </Typography>
       </div>
-    );
+    )
   }
   return (
     <div>
@@ -26,7 +26,7 @@ const CurrentRoom = () => {
         Please select a Room.
       </Typography>
     </div>
-  );
-};
+  )
+}
 
-export default CurrentRoom;
+export default CurrentRoom
