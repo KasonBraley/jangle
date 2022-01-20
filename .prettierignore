@@ -1,0 +1,14 @@
+build
+coverage
+node_modules/
+dist
+.env
+
+# Yarn Integrity file
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
