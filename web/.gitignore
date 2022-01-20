@@ -1,17 +1,13 @@
 coverage
-
-# Dependency directories
 node_modules/
 
 # Yarn Integrity file
+.pnp.*
 .yarn/*
-!.yarn/cache
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
 
-# dotenv environment variables file
 .env
-.env.test

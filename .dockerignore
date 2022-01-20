@@ -1,0 +1,7 @@
+web
+LICENSE
+README.md
+.gitignore
+Dockerfile
+.dockerignore
+.git
